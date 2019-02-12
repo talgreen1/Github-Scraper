@@ -1,6 +1,9 @@
 package com.talgreen;
 
+import org.openqa.selenium.WebElement;
+
 import java.net.MalformedURLException;
+import java.util.List;
 
 public class App {
 
@@ -8,7 +11,15 @@ public class App {
         GithubParser parser = new GithubParser();
         parser.openGithub();
         parser.searchGithub("Selenium");
-        parser.parse();
+        parser.parse(5);
+
+
+        List<WebElement> repositoriesWebElements = parser.getRepositoriesWebElements();
+
+        Repository repository = new RepositoryBuilder().buildFromRepositoryWebElement(repositoriesWebElements.get(0));
+
+        System.out.println(repository);
+
         parser.closeGithub();
 
 

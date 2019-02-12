@@ -26,6 +26,7 @@ public class GithubParser {
     public void openGithub() throws MalformedURLException {
         initDriver();
         driver.get(githubHomepage);
+        driver.manage().window().maximize();
     }
 
     public void searchGithub(String textToSearch){
@@ -47,5 +48,9 @@ public class GithubParser {
     public void parse(int numOfRepositories) {
         repositories = driver.findElements(By.xpath("//ul[@class='repo-list']/li"));
         repositories = repositories.subList(0,numOfRepositories-1);
+    }
+
+    public List<WebElement> getRepositoriesWebElements(){
+        return this.repositories;
     }
 }
