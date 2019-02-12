@@ -3,12 +3,14 @@ package com.talgreen;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 public class GithubParser {
 
@@ -17,6 +19,7 @@ public class GithubParser {
     private int seleiumPort = 4444;
     private Capabilities dc = new ChromeOptions();
     private String githubHomepage = "https://github.com/";
+    private List<WebElement> repositories;
 
 
 
@@ -39,5 +42,10 @@ public class GithubParser {
 
     private String getSeleniumUrl() {
         return "http://" + seleniumUrl + ":" + seleiumPort + "/wd/hub";
+    }
+
+    public void parse(int numOfRepositories) {
+        repositories = driver.findElements(By.xpath("//ul[@class='repo-list']/li"));
+        repositories = repositories.subList(0,numOfRepositories-1);
     }
 }

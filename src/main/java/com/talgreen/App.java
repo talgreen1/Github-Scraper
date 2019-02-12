@@ -8,6 +8,7 @@ public class App {
         GithubParser parser = new GithubParser();
         parser.openGithub();
         parser.searchGithub("Selenium");
+        parser.parse();
         parser.closeGithub();
 
 
