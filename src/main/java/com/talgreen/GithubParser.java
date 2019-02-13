@@ -1,5 +1,8 @@
 package com.talgreen;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
@@ -58,6 +61,13 @@ public class GithubParser {
         return this.getRepositoriesWebElements().stream()
                 .map(repositoryBuilder::buildFromRepositoryWebElement)
                 .collect(Collectors.toList());
+    }
+
+    public void saveRepositoriesToDb() {
+        Configuration con = new Configuration().configure().addAnnotatedClass(Repository.class);
+        SessionFactory sf = con.buildSessionFactory();
+        Session session = sf.openSession();
+        session.save(getRepositories().get(0));
     }
 
     public List<WebElement> getRepositoriesWebElements() {

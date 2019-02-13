@@ -17,6 +17,8 @@ public class App {
         List<Repository> repositories = parser.getRepositories();
 
         repositories.forEach(System.out::println);
+
+        parser.saveRepositoriesToDb();
 //        List<WebElement> repositoriesWebElements = parser.getRepositoriesWebElements();
 //
 //        Repository repository = new RepositoryBuilder().buildFromRepositoryWebElement(repositoriesWebElements.get(0));

@@ -1,10 +1,15 @@
 package com.talgreen;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Entity
 public class Repository {
+    @Id
+    private int id;
     private String title;
     private String description;
 
@@ -17,7 +22,7 @@ public class Repository {
     }
 
     private URL url;
-    private List<String> tags;
+    //private List<String> tags;
     private LocalDateTime lastUpdate;
     private String language;
     private int stars;
@@ -38,13 +43,13 @@ public class Repository {
         this.description = description;
     }
 
-    public List<String> getTags() {
-        return tags;
-    }
+//    public List<String> getTags() {
+//        return tags;
+//    }
 
-    public void setTags(List<String> tags) {
-        this.tags = tags;
-    }
+//    public void setTags(List<String> tags) {
+//        this.tags = tags;
+//    }
 
     public LocalDateTime getLastUpdate() {
         return lastUpdate;
@@ -76,7 +81,7 @@ public class Repository {
                 "title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", url=" + url +
-                ", tags=" + tags +
+               // ", tags=" + tags +
                 ", lastUpdate=" + lastUpdate +
                 ", language='" + language + '\'' +
                 ", stars=" + stars +
