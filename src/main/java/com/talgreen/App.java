@@ -14,11 +14,14 @@ public class App {
         parser.parse(5);
 
 
-        List<WebElement> repositoriesWebElements = parser.getRepositoriesWebElements();
+        List<Repository> repositories = parser.getRepositories();
 
-        Repository repository = new RepositoryBuilder().buildFromRepositoryWebElement(repositoriesWebElements.get(0));
-
-        System.out.println(repository);
+        repositories.forEach(System.out::println);
+//        List<WebElement> repositoriesWebElements = parser.getRepositoriesWebElements();
+//
+//        Repository repository = new RepositoryBuilder().buildFromRepositoryWebElement(repositoriesWebElements.get(0));
+//
+//        System.out.println(repository);
 
         parser.closeGithub();
 

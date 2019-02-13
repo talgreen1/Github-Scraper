@@ -11,6 +11,8 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class GithubParser {
 
@@ -22,21 +24,21 @@ public class GithubParser {
     private List<WebElement> repositories;
 
 
-
     public void openGithub() throws MalformedURLException {
         initDriver();
         driver.get(githubHomepage);
         driver.manage().window().maximize();
     }
 
-    public void searchGithub(String textToSearch){
+    public void searchGithub(String textToSearch) {
         driver.findElement(By.name("q")).sendKeys(textToSearch + "\n");
 
     }
 
-    public void closeGithub(){
+    public void closeGithub() {
         driver.quit();
     }
+
     private void initDriver() throws MalformedURLException {
         driver = new RemoteWebDriver(new URL(getSeleniumUrl()), dc);
     }
@@ -47,10 +49,18 @@ public class GithubParser {
 
     public void parse(int numOfRepositories) {
         repositories = driver.findElements(By.xpath("//ul[@class='repo-list']/li"));
-        repositories = repositories.subList(0,numOfRepositories-1);
+        repositories = repositories.subList(0, numOfRepositories - 1);
     }
 
-    public List<WebElement> getRepositoriesWebElements(){
+    public List<Repository> getRepositories() {
+        RepositoryBuilder repositoryBuilder = new RepositoryBuilder();
+
+        return this.getRepositoriesWebElements().stream()
+                .map(repositoryBuilder::buildFromRepositoryWebElement)
+                .collect(Collectors.toList());
+    }
+
+    public List<WebElement> getRepositoriesWebElements() {
         return this.repositories;
     }
 }
