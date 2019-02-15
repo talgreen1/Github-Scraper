@@ -25,6 +25,7 @@ public class GithubParser {
     private WebDriver driver;
     @Transient
     private String seleniumUrl = "192.168.99.100";
+//    private String seleniumUrl = "localhost";
     @Transient
     private int seleiumPort = 4444;
     @Transient
