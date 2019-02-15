@@ -24,25 +24,16 @@ public class GithubParser {
     @Transient
     private WebDriver driver;
     @Transient
-    private String seleniumUrl = "192.168.99.100";
-//    private String seleniumUrl = "localhost";
-    @Transient
-    private int seleiumPort = 4444;
-    @Transient
     private Capabilities dc = new ChromeOptions();
-    @Transient
-    private String githubHomepage = "https://github.com/";
-
 
     public void setRepositories(List<Repository> repositories) {
         this.repositories = repositories;
     }
 
-    //    private List<WebElement> repositories;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Repository> repositories;
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     private Date created;
@@ -50,7 +41,7 @@ public class GithubParser {
 
     public void openGithub() throws MalformedURLException {
         initDriver();
-        driver.get(githubHomepage);
+        driver.get(Props.GITHUB_HOMEPAGE);
         driver.manage().window().maximize();
     }
 
@@ -69,7 +60,7 @@ public class GithubParser {
     }
 
     private String getSeleniumUrl() {
-        return "http://" + seleniumUrl + ":" + seleiumPort + "/wd/hub";
+        return "http://" + Props.SELENIUM_URL + ":" + Props.SELENIUM_PORT + "/wd/hub";
     }
 
     public void parse(int numOfRepositories) {
