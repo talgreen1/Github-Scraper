@@ -24,7 +24,7 @@ public class GithubParser {
     @Transient
     private WebDriver driver;
     @Transient
-    private String seleniumUrl = "localhost";
+    private String seleniumUrl = "192.168.99.100";
     @Transient
     private int seleiumPort = 4444;
     @Transient
@@ -52,6 +52,7 @@ public class GithubParser {
         driver.get(githubHomepage);
         driver.manage().window().maximize();
     }
+
 
     public void searchGithub(String textToSearch) {
         driver.findElement(By.name("q")).sendKeys(textToSearch + "\n");
