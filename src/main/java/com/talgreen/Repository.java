@@ -1,6 +1,8 @@
 package com.talgreen;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -8,7 +10,16 @@ import java.util.List;
 
 @Entity
 public class Repository {
+    public Repository(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
+
+    public Repository() {
+    }
+
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
     private String title;
     private String description;
@@ -43,13 +54,6 @@ public class Repository {
         this.description = description;
     }
 
-//    public List<String> getTags() {
-//        return tags;
-//    }
-
-//    public void setTags(List<String> tags) {
-//        this.tags = tags;
-//    }
 
     public LocalDateTime getLastUpdate() {
         return lastUpdate;
